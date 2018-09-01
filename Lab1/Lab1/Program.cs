@@ -10,7 +10,12 @@ namespace Lab1
     {
         static void Main(string[] args)
         {
-            //here we go
+            SimCorpMobile scmob = new SimCorpMobile();
+            Nokia3310 mymob = new Nokia3310();
+            Console.WriteLine("My SimCorp Mobile phone desc: {0} ", scmob.GetDescription());
+            Console.WriteLine("My personal Mobile phone desc: {0}", mymob.GetDescription());
+            Console.ReadLine();
+
 
         }
     }
