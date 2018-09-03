@@ -9,11 +9,19 @@ namespace Lab1.Components
 {
     public class Keyboard
     {
-        public int NumberOfKeys { get; set; }
+        public int NumberOfKeys { get; }
         public CultureInfo Culture  { get; set; }
+
+        public Keyboard(int numOfKeys, CultureInfo culture)
+        {
+            NumberOfKeys = numOfKeys;
+            Culture = culture;
+        }
+
         public override string ToString()
         {
-            return "Keyboard";
+            return Culture.EnglishName.ToString() + " "+ NumberOfKeys.ToString() + " keys";
+
         }
     }
 }

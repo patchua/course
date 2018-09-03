@@ -53,7 +53,6 @@
     <Compile Include="Components\RetinaScreen.cs" />
     <Compile Include="Components\ScreenBase.cs" />
     <Compile Include="Components\Simcard.cs" />
-    <Compile Include="Components\VirtualKeyboard.cs" />
     <Compile Include="MobilePhone.cs" />
     <Compile Include="Nokia3310.cs" />
     <Compile Include="Program.cs" />

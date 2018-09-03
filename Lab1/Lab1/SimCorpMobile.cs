@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lab1.Components;
+using System.Globalization;
 
 namespace Lab1
 {
@@ -21,10 +22,16 @@ namespace Lab1
         {
             get
             {
-                return vVirtualKeyboard ;
+                return vIlluminatedKeyboard ;
             }
         }
-        private readonly RetinaScreen vRetinaScreen = new RetinaScreen();
-        private readonly VirtualKeyboard vVirtualKeyboard = new VirtualKeyboard();
+        private readonly RetinaScreen vRetinaScreen;
+        private readonly IlluminatedKeyboard vIlluminatedKeyboard ;
+
+        public SimCorpMobile(Battery battery, Simcard simcard) : base(battery, simcard)
+        {
+            vRetinaScreen = new RetinaScreen();
+            vIlluminatedKeyboard = new IlluminatedKeyboard(102, new CultureInfo("ua-UA",false));
+        }
     }
 }

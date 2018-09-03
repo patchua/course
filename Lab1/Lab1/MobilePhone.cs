@@ -10,9 +10,16 @@ namespace Lab1
     public abstract class MobilePhone
     {
         public abstract ScreenBase Screen { get; }
-        public abstract Keyboard Keyboard{ get; }
-        public Battery Battery = new Battery();
+        public abstract Keyboard Keyboard { get; }
+        public Battery Battery {get; }
         public Simcard Simcard { get;  }
+
+        protected MobilePhone( Battery battery, Simcard simcard)
+        {
+            Battery = battery;
+            Simcard = simcard;
+
+        }
 
         private void Show(IScreenImage image)
         {
@@ -25,6 +32,7 @@ namespace Lab1
             descriptionBuilder.AppendLine($"ScreenType:{Screen.ToString()}");
             descriptionBuilder.AppendLine($"Battery: {Battery.ToString()}");
             descriptionBuilder.AppendLine($"Keyboard:{Keyboard.ToString()}");
+            descriptionBuilder.AppendLine($"SimCard:{ Simcard.ToString()}");
             return descriptionBuilder.ToString();
         }
 

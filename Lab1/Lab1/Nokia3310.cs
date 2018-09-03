@@ -24,8 +24,13 @@ namespace Lab1
                 return vKeyboard;
             }
         }
-
-        private readonly MonochromeScreen vMonochromeScreen = new MonochromeScreen();
-        private readonly Keyboard vKeyboard = new Keyboard();
+        public Nokia3310(Battery battery, Simcard simcard):base(battery,simcard)
+        {
+            vMonochromeScreen = new MonochromeScreen();
+            vKeyboard = new Keyboard(103, new System.Globalization.CultureInfo("us-US",false));
+  
+        }
+        private readonly MonochromeScreen vMonochromeScreen;
+        private readonly Keyboard vKeyboard;
     }
 }
