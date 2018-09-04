@@ -8,22 +8,23 @@ namespace Lab1.Components
 {
     class RetinaScreen : ColourScreen
     {
-        private void ShowImageOnRetina(IScreenImage image, int brightness)
+        public RetinaScreen(double hight, double width, int resolution, int colours) : base(hight, width, 300, 300000)
+        {
+        }
+
+        private void ShowImageOnRetina(IScreenImage image, double brightness)
         {
             //implementation
         }
         public override void Show(IScreenImage image)
         {
-            ShowImageOnRetina(image, 5);
+            ShowImageOnRetina(image, 0.5);
         }
 
-        public override void Show(IScreenImage image, int brightness)
+        public override void Show(IScreenImage image, double brightness)
         {
             ShowImageOnRetina(image, brightness);
         }
-        public override string ToString()
-        {
-            return "Retina"+base.ToString();
-        }
+    
     }
 }

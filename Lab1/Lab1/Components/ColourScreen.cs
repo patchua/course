@@ -8,13 +8,19 @@ namespace Lab1.Components
 {
     public abstract class ColourScreen : ScreenBase
     {
-        public int Brightness { get; set; }
-        public int Colours { get; set; }
-        public abstract void Show(IScreenImage image, int brightness);
+        public ColourScreen(double hight, double width, int resolution, int colours) : base(hight, width, resolution)
+        {
+            Colours = colours;
+            Brightness = 0.5;
+        }
+
+        public double Brightness { get; set; }
+        public int Colours { get; }
+        public abstract void Show(IScreenImage image, double brightness);
 
         public override string ToString()
         {
-            return "ColourScreen";
+            return Size.ToString() + "\" "+  Colours.ToString() + " colours with " + Resolution.ToString() + "dpi resolution";
         }
     }
 }

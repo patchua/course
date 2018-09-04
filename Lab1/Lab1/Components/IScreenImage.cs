@@ -9,7 +9,9 @@ namespace Lab1.Components
 {
     public interface IScreenImage
     {
-        int Hight { get; set; }
-        int Width { get; set; }
+        double Hight { get; }
+        double Width { get; }
+    
     }
+   
 }

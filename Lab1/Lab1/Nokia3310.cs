@@ -26,7 +26,7 @@ namespace Lab1
         }
         public Nokia3310(Battery battery, Simcard simcard):base(battery,simcard)
         {
-            vMonochromeScreen = new MonochromeScreen();
+            vMonochromeScreen = new MonochromeScreen(60,70,60);
             vKeyboard = new Keyboard(103, new System.Globalization.CultureInfo("us-US",false));
   
         }

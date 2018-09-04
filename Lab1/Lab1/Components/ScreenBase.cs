@@ -8,18 +8,22 @@ namespace Lab1.Components
 {
     public abstract class ScreenBase:IScreenImage
     {
-        public Resolution Resolution { get; set; }
-        public Double Size { get; set; }
+        public int Resolution { get;private  set; }
+        public double Size { get
+            {
+                return Hight * Width;
+            }
+        }
 
-        public int Hight { get; set; }
-        public int Width { get; set; }
+        public ScreenBase(double hight, double width, int resolution)
+        {
+            Hight = hight;
+            Width = width;
+            Resolution = resolution;
+        }
+        public double Hight { get; private set; }
+        public double Width { get; private set; }
 
         public abstract void Show(IScreenImage image);
-    }
-
-    public struct Resolution
-    {
-        public int X { get; set; }
-        public int Y { get; set; }
     }
 }

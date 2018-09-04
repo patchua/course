@@ -30,7 +30,7 @@ namespace Lab1
 
         public SimCorpMobile(Battery battery, Simcard simcard) : base(battery, simcard)
         {
-            vRetinaScreen = new RetinaScreen();
+            vRetinaScreen = new RetinaScreen(1.2,2.5,300,30000);
             vIlluminatedKeyboard = new IlluminatedKeyboard(102, new CultureInfo("ua-UA",false));
         }
     }

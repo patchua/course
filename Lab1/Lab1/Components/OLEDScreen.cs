@@ -8,7 +8,11 @@ namespace Lab1.Components
 {
     class OLEDScreen:ColourScreen
     {
-        private void ShowImage(IScreenImage image, int brightness)
+        public OLEDScreen(double hight, double width) : base(hight, width, 200, 20000)
+        {
+        }
+
+        private void ShowImage(IScreenImage image, double brightness)
         {
             //implementation
         }
@@ -17,13 +21,13 @@ namespace Lab1.Components
             ShowImage(image, 5);
         }
 
-        public override void Show(IScreenImage image, int brightness)
+        public override void Show(IScreenImage image, double brightness)
         {
             ShowImage(image, brightness);
         }
         public override string ToString()
         {
-            return "OLED"+base.ToString();
+            return "OLED "+base.ToString();
         }
     }
 }

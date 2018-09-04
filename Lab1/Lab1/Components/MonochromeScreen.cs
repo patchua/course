@@ -8,6 +8,11 @@ namespace Lab1.Components
 {
     class MonochromeScreen : ScreenBase
     {
+        public MonochromeScreen(int hight, int width, int resolution) : base(hight, width, resolution)
+        {
+
+        }
+
         public override void Show(IScreenImage image)
         {
             Console.WriteLine("Monochrome Screeen");
@@ -15,7 +20,7 @@ namespace Lab1.Components
 
         public override string ToString()
         {
-            return "MonochromeScreen";
+            return "Monochrome"+base.ToString();
         }
     }
 }
