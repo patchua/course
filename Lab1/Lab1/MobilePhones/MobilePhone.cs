@@ -7,30 +7,30 @@ using System.Threading.Tasks;
 
 namespace MobilePhoneApp
 {
-    public abstract class MobilePhone:IPlayback,ICharge 
+    public abstract class MobilePhone
     {
         public abstract ScreenBase Screen { get; }
         public abstract Keyboard Keyboard { get; }
         public Battery Battery {get; }
         public Simcard Simcard { get;  }
         public IPlayback PlaybackComponent { get; set; }
-        public ICharge ChargerComponent { get; set; }
-
-        public double Voltage
-        {
-            get
+        public IPlayback Speaker { get;  }
+        public ICharge ChargerComponent { get
             {
-                return ChargerComponent.Voltage;
+                return ChargerComponent;
             }
-
-           
-        }
+            set
+            {
+                ChargerComponent = value;
+                if (ChargerComponent!=null)
+                ChargerComponent.Charge(Battery);
+            } }
 
         protected MobilePhone( Battery battery, Simcard simcard)
         {
             Battery = battery;
             Simcard = simcard;
-
+            Speaker = new PlaybackDevices.PhoneSpeaker();
         }
 
         private void Show(IScreenImage image)
@@ -50,12 +50,11 @@ namespace MobilePhoneApp
 
         public void Play(object data)
         {
-            PlaybackComponent.Play(data);
+            if (PlaybackComponent != null)
+                PlaybackComponent.Play(data);
+            else
+                Speaker.Play(data);
         }
 
-        public void Charge(Battery b)
-        {
-            ChargerComponent.Charge(Battery);
-        }
     }
 }

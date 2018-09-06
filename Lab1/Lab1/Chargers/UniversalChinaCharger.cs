@@ -1,22 +1,21 @@
-﻿using System;
+﻿using MobilePhoneApp.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MobilePhoneApp.Components;
 
-namespace MobilePhoneApp.Chargers
+namespace Lab1.Chargers
 {
-    class IphoneCharger : ICharge
+    class UniversalChinaCharger : ICharge
+
     {
         public double Voltage
         {
             get
             {
-                return 3;
+                return 0.5;
             }
-
-            
         }
 
         public void Charge(Battery battery)
