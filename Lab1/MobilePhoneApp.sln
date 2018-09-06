@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab1", "Lab1\Lab1.csproj", "{FC834ADB-87D1-4C7C-98E5-C4A76DAF0459}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilePhoneApp", "Lab1\MobilePhoneApp.csproj", "{FC834ADB-87D1-4C7C-98E5-C4A76DAF0459}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Lab1.Components;
+using MobilePhoneApp.Components;
 using System.Globalization;
 
-namespace Lab1
+namespace MobilePhoneApp
 {
     class SimCorpMobile : MobilePhone
     {

@@ -1,11 +1,11 @@
-﻿using Lab1.Components;
+﻿using MobilePhoneApp.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab1.PlaybackDevices
+namespace MobilePhoneApp.PlaybackDevices
 {
     class UnofficialHeadset : IPlayback
     {

@@ -1,19 +1,30 @@
-﻿using Lab1.Components;
+﻿using MobilePhoneApp.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab1
+namespace MobilePhoneApp
 {
-    public abstract class MobilePhone:IPlayback 
+    public abstract class MobilePhone:IPlayback,ICharge 
     {
         public abstract ScreenBase Screen { get; }
         public abstract Keyboard Keyboard { get; }
         public Battery Battery {get; }
         public Simcard Simcard { get;  }
         public IPlayback PlaybackComponent { get; set; }
+        public ICharge ChargerComponent { get; set; }
+
+        public double Voltage
+        {
+            get
+            {
+                return ChargerComponent.Voltage;
+            }
+
+           
+        }
 
         protected MobilePhone( Battery battery, Simcard simcard)
         {
@@ -40,6 +51,11 @@ namespace Lab1
         public void Play(object data)
         {
             PlaybackComponent.Play(data);
+        }
+
+        public void Charge(Battery b)
+        {
+            ChargerComponent.Charge(Battery);
         }
     }
 }

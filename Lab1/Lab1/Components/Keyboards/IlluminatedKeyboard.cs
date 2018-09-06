@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab1.Components
+namespace MobilePhoneApp.Components
 {
     class IlluminatedKeyboard:Keyboard
     {

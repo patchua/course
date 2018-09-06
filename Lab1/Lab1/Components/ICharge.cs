@@ -4,14 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace MobilePhoneApp.Components
 {
-    public interface IScreenImage
+    public interface ICharge
     {
-        double Hight { get; }
-        double Width { get; }
-    
+        void Charge(Battery battery);
+        
+        double Voltage { get;  }
     }
-   
 }
