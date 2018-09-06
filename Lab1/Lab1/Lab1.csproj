@@ -44,20 +44,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Battery.cs" />
-    <Compile Include="Components\ColourScreen.cs" />
-    <Compile Include="Components\IlluminatedKeyboard.cs" />
-    <Compile Include="Components\IScreenImage.cs" />
-    <Compile Include="Components\Keyboard.cs" />
-    <Compile Include="Components\MonochromeScreen.cs" />
-    <Compile Include="Components\OLEDScreen.cs" />
-    <Compile Include="Components\RetinaScreen.cs" />
-    <Compile Include="Components\ScreenBase.cs" />
+    <Compile Include="Components\Screens\ColourScreen.cs" />
+    <Compile Include="Components\Keyboards\IlluminatedKeyboard.cs" />
+    <Compile Include="Components\Screens\IScreenImage.cs" />
+    <Compile Include="Components\Keyboards\Keyboard.cs" />
+    <Compile Include="Components\Screens\MonochromeScreen.cs" />
+    <Compile Include="Components\Screens\OLEDScreen.cs" />
+    <Compile Include="Components\Screens\RetinaScreen.cs" />
+    <Compile Include="Components\Screens\ScreenBase.cs" />
     <Compile Include="Components\Simcard.cs" />
-    <Compile Include="MobilePhone.cs" />
-    <Compile Include="Nokia3310.cs" />
+    <Compile Include="MobilePhones\MobilePhone.cs" />
+    <Compile Include="MobilePhones\Nokia3310.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SimCorpMobile.cs" />
+    <Compile Include="MobilePhones\SimCorpMobile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
