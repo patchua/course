@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lab1.Components;
+using Lab1.PlaybackDevices;
 
 namespace Lab1
 {
@@ -16,8 +17,6 @@ namespace Lab1
             Console.WriteLine("My SimCorp Mobile phone desc: \n{0} ", scmob.GetDescription());
             Console.WriteLine("My personal Mobile phone desc: \n{0}", mymob.GetDescription());
             Console.ReadLine();
-
-
         }
     }
 }

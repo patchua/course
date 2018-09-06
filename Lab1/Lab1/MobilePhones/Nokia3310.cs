@@ -31,6 +31,6 @@ namespace Lab1
   
         }
         private readonly MonochromeScreen vMonochromeScreen;
-        private readonly Keyboard vKeyboard;
+        private readonly Keyboard vKeyboard;       
     }
 }

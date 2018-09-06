@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace Lab1
 {
-    public abstract class MobilePhone
+    public abstract class MobilePhone:IPlayback 
     {
         public abstract ScreenBase Screen { get; }
         public abstract Keyboard Keyboard { get; }
         public Battery Battery {get; }
         public Simcard Simcard { get;  }
+        public IPlayback PlaybackComponent { get; set; }
 
         protected MobilePhone( Battery battery, Simcard simcard)
         {
@@ -36,5 +37,9 @@ namespace Lab1
             return descriptionBuilder.ToString();
         }
 
+        public void Play(object data)
+        {
+            PlaybackComponent.Play(data);
+        }
     }
 }
