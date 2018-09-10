@@ -1,12 +1,11 @@
-﻿using System;
+﻿using MobilePhoneCommon;
+using MobilePhoneCommon.Chargers;
+using MobilePhoneCommon.Components;
+using MobilePhoneCommon.OtherDevices;
+using MobilePhoneCommon.PlaybackDevices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MobilePhoneApp.Components;
-using MobilePhoneApp.PlaybackDevices;
-using MobilePhoneApp.Chargers;
-using MobilePhoneApp.OtherDevices;
 
 namespace MobilePhoneApp
 {
@@ -29,7 +28,7 @@ namespace MobilePhoneApp
             chargingDevices.Add(new SmartCharger(consoleOutput));
             chargingDevices.Add(new UniversalChinaCharger(consoleOutput));
 
-            CarAudio carAudioDevice = new CarAudio(consoleOutput); //This device has both interfaces
+            var carAudioDevice = new CarAudio(consoleOutput); //This device has both interfaces
             playbackDevices.Add(carAudioDevice);
             chargingDevices.Add(carAudioDevice);
 
