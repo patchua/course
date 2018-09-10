@@ -26,7 +26,7 @@ namespace MobilePhoneApp
                 if (value != null)
                 {
                     if (vChargerComponent != null)
-                        Console.WriteLine("Cannot insert another charger. We already have {0} inserted.", vChargerComponent.GetType());
+                        Screen.Show($"Cannot insert another charger. We already have {vChargerComponent.GetType()} inserted.");
                     else
                     {
                         vChargerComponent = value;
@@ -38,11 +38,11 @@ namespace MobilePhoneApp
                     vChargerComponent = value;
             } }
 
-        protected MobilePhone( Battery battery, Simcard simcard)
+        protected MobilePhone( Battery battery, Simcard simcard, IOutput output)
         {
             Battery = battery;
             Simcard = simcard;
-            Speaker = new PlaybackDevices.PhoneSpeaker();
+            Speaker = new PlaybackDevices.PhoneSpeaker(output);
         }
 
         private void Show(IScreenImage image)

@@ -9,9 +9,14 @@ namespace MobilePhoneApp.PlaybackDevices
 {
     class UnofficialHeadset : IPlayback
     {
+        private IOutput Output;
+        public UnofficialHeadset(IOutput output)
+        {
+            Output = output;
+        }
         public void Play(object data)
         {
-            Console.WriteLine("{0} is playing sound", nameof(UnofficialHeadset));
+            Output.WriteLine($"{nameof(UnofficialHeadset)} is playing sound");
         }
     }
 }

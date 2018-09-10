@@ -9,9 +9,14 @@ namespace MobilePhoneApp.PlaybackDevices
 {
     class PhoneSpeaker : IPlayback
     {
+        private IOutput Output;
+        public PhoneSpeaker(IOutput output)
+        {
+            Output = output;
+        }
         public void Play(object data)
         {
-            Console.WriteLine("{0} is playing sound", nameof(PhoneSpeaker));
+            Output.WriteLine($"{nameof(PhoneSpeaker)} is playing sound");
         }
     }
 }

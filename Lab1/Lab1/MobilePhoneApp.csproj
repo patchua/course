@@ -48,6 +48,7 @@
     <Compile Include="Chargers\UniversalChinaCharger.cs" />
     <Compile Include="Components\Battery.cs" />
     <Compile Include="Components\ICharge.cs" />
+    <Compile Include="Components\IOutput.cs" />
     <Compile Include="Components\Screens\ColourScreen.cs" />
     <Compile Include="Components\Keyboards\IlluminatedKeyboard.cs" />
     <Compile Include="Components\IScreenImage.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Components\Screens\RetinaScreen.cs" />
     <Compile Include="Components\Screens\ScreenBase.cs" />
     <Compile Include="Components\Simcard.cs" />
+    <Compile Include="ConsoleOutput.cs" />
     <Compile Include="MobilePhones\MobilePhone.cs" />
     <Compile Include="MobilePhones\Nokia3310.cs" />
     <Compile Include="OtherDevices\CarAudio.cs" />

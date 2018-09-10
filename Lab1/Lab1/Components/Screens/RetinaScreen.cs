@@ -8,7 +8,7 @@ namespace MobilePhoneApp.Components
 {
     class RetinaScreen : ColourScreen
     {
-        public RetinaScreen(double hight, double width, int resolution, int colours) : base(hight, width, 300, 300000)
+        public RetinaScreen(double hight, double width, int resolution, int colours,IOutput output) : base(hight, width, 300, 300000,output)
         {
         }
 

@@ -24,9 +24,9 @@ namespace MobilePhoneApp
                 return vKeyboard;
             }
         }
-        public Nokia3310(Battery battery, Simcard simcard):base(battery,simcard)
+        public Nokia3310(Battery battery, Simcard simcard, IOutput output):base(battery,simcard,output)
         {
-            vMonochromeScreen = new MonochromeScreen(60,70,60);
+            vMonochromeScreen = new MonochromeScreen(60,70,60,output);
             vKeyboard = new Keyboard(103, new System.Globalization.CultureInfo("us-US",false));
   
         }

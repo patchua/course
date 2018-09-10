@@ -1,4 +1,5 @@
-﻿using MobilePhoneApp.Components;
+﻿
+using MobilePhoneApp.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,11 @@ namespace MobilePhoneApp.Chargers
     class UniversalChinaCharger : ICharge
 
     {
+        private IOutput Output;
+       public  UniversalChinaCharger(IOutput output)
+        {
+            Output = output;
+        }
         public double Voltage
         {
             get
@@ -20,7 +26,7 @@ namespace MobilePhoneApp.Chargers
 
         public void Charge(Battery battery)
         {
-            Console.WriteLine("Chraging {0}mAh battery. Ready in {1} hours.", battery.Capacity, battery.Capacity / Math.Min(battery.ChargingVoltage, Voltage));
+            Output.WriteLine($"Chraging {battery.Capacity}mAh battery. Ready in {battery.Capacity / Math.Min(battery.ChargingVoltage, Voltage)} hours.");
         }
     }
 }

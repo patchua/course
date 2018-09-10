@@ -28,9 +28,9 @@ namespace MobilePhoneApp
         private readonly RetinaScreen vRetinaScreen;
         private readonly IlluminatedKeyboard vIlluminatedKeyboard ;
 
-        public SimCorpMobile(Battery battery, Simcard simcard) : base(battery, simcard)
+        public SimCorpMobile(Battery battery, Simcard simcard,IOutput output) : base(battery, simcard,output)
         {
-            vRetinaScreen = new RetinaScreen(1.2,2.5,300,30000);
+            vRetinaScreen = new RetinaScreen(1.2,2.5,300,30000,output);
             vIlluminatedKeyboard = new IlluminatedKeyboard(102, new CultureInfo("ua-UA",false));
         }
     }

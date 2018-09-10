@@ -8,7 +8,7 @@ namespace MobilePhoneApp.Components
 {
     public abstract class ColourScreen : ScreenBase
     {
-        public ColourScreen(double hight, double width, int resolution, int colours) : base(hight, width, resolution)
+        public ColourScreen(double hight, double width, int resolution, int colours,IOutput output) : base(hight, width, resolution,output)
         {
             Colours = colours;
             Brightness = 0.5;

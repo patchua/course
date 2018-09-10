@@ -9,9 +9,14 @@ namespace MobilePhoneApp.PlaybackDevices
 {
     class IphoneOriginalHeadphones : IPlayback
     {
+        private IOutput Output;
+        public IphoneOriginalHeadphones(IOutput output)
+        {
+            Output = output;
+        }
         public void Play(object data)
         {
-            Console.WriteLine("{0} is playing sound",nameof(IphoneOriginalHeadphones));
+            Output.WriteLine($"{nameof(IphoneOriginalHeadphones)} is playing sound");
         }
     }
 }

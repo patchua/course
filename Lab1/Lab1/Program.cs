@@ -14,20 +14,22 @@ namespace MobilePhoneApp
     {
         static void Main(string[] args)
         {
+            var consoleOutput = new MobilePhoneApp.ConsoleOutput();
+
             List<MobilePhone> phones= new List<MobilePhone>();
-            phones.Add( new SimCorpMobile(new Battery(3000, BatteryType.LiPo),new Simcard("Vodafone",FormFactor.Nano,NetworkType.LTE)));
-            phones.Add( new Nokia3310(new Battery(1500,BatteryType.NiMg),new Simcard("LifeCell")));
+            phones.Add( new SimCorpMobile(new Battery(3000, BatteryType.LiPo),new Simcard("Vodafone",FormFactor.Nano,NetworkType.LTE),consoleOutput));
+            phones.Add( new Nokia3310(new Battery(1500,BatteryType.NiMg),new Simcard("LifeCell"),consoleOutput));
 
             List<IPlayback> playbackDevices = new List<IPlayback>();
-            playbackDevices.Add(new IphoneOriginalHeadphones());
-            playbackDevices.Add(new UnofficialHeadset());
+            playbackDevices.Add(new IphoneOriginalHeadphones(consoleOutput));
+            playbackDevices.Add(new UnofficialHeadset(consoleOutput));
 
             List<ICharge> chargingDevices = new List<ICharge>();
-            chargingDevices.Add(new IphoneCharger());
-            chargingDevices.Add(new SmartCharger());
-            chargingDevices.Add(new UniversalChinaCharger());
+            chargingDevices.Add(new IphoneCharger(consoleOutput));
+            chargingDevices.Add(new SmartCharger(consoleOutput));
+            chargingDevices.Add(new UniversalChinaCharger(consoleOutput));
 
-            CarAudio carAudioDevice = new CarAudio(); //This device has both interfaces
+            CarAudio carAudioDevice = new CarAudio(consoleOutput); //This device has both interfaces
             playbackDevices.Add(carAudioDevice);
             chargingDevices.Add(carAudioDevice);
 

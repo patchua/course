@@ -9,6 +9,11 @@ namespace MobilePhoneApp.OtherDevices
 {
     class CarAudio : IPlayback, ICharge
     {
+        private IOutput Output;
+        public CarAudio(IOutput output)
+        {
+            Output = output;
+        }
         public double Voltage
         {
             get
@@ -19,12 +24,12 @@ namespace MobilePhoneApp.OtherDevices
 
         public void Charge(Battery battery)
         {
-            Console.WriteLine("Chraging {0}mAh battery. Ready in {1} hours.", battery.Capacity, battery.Capacity / Math.Min(battery.ChargingVoltage, Voltage));
+           Output.WriteLine($"Chraging {battery.Capacity}mAh battery. Ready in {battery.Capacity / Math.Min(battery.ChargingVoltage, Voltage)} hours.");
         }
 
         public void Play(object data)
         {
-            Console.WriteLine("{0} is playing sound", nameof(CarAudio)); ;
+            Output.WriteLine($"{nameof(CarAudio)} is playing sound") ;
         }
     }
 }

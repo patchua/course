@@ -8,7 +8,7 @@ namespace MobilePhoneApp.Components
 {
     class OLEDScreen:ColourScreen
     {
-        public OLEDScreen(double hight, double width) : base(hight, width, 200, 20000)
+        public OLEDScreen(double hight, double width,IOutput output) : base(hight, width, 200, 20000,output)
         {
         }
 

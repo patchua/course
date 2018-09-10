@@ -10,6 +10,11 @@ namespace MobilePhoneApp.Chargers
     class SmartCharger : ICharge
 
     {
+        private IOutput Output;
+        public SmartCharger(IOutput output)
+        {
+            Output = output;
+        }
         public double Voltage
         {
             get
@@ -20,7 +25,8 @@ namespace MobilePhoneApp.Chargers
 
         public void Charge(Battery battery)
         {
-            Console.WriteLine("Chraging {0}mAh battery. Ready in {1} hours.", battery.Capacity, battery.Capacity /battery.ChargingVoltage);
+       
+            Output.WriteLine($"Chraging {battery.Capacity}mAh battery. Ready in {battery.Capacity / battery.ChargingVoltage} hours.");
         }
     }
 }
