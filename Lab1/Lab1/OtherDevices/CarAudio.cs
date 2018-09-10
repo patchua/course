@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab1.OtherDevices
+namespace MobilePhoneApp.OtherDevices
 {
     class CarAudio : IPlayback, ICharge
     {

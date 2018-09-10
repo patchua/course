@@ -9,6 +9,8 @@ namespace MobilePhoneApp
 {
     public abstract class MobilePhone
     {
+        private ICharge vChargerComponent;
+
         public abstract ScreenBase Screen { get; }
         public abstract Keyboard Keyboard { get; }
         public Battery Battery {get; }
@@ -17,13 +19,23 @@ namespace MobilePhoneApp
         public IPlayback Speaker { get;  }
         public ICharge ChargerComponent { get
             {
-                return ChargerComponent;
+                return vChargerComponent;
             }
             set
             {
-                ChargerComponent = value;
-                if (ChargerComponent!=null)
-                ChargerComponent.Charge(Battery);
+                if (value != null)
+                {
+                    if (vChargerComponent != null)
+                        Console.WriteLine("Cannot insert another charger. We already have {0} inserted.", vChargerComponent.GetType());
+                    else
+                    {
+                        vChargerComponent = value;
+                        vChargerComponent.Charge(Battery);
+                    }
+
+                }
+                else
+                    vChargerComponent = value;
             } }
 
         protected MobilePhone( Battery battery, Simcard simcard)
