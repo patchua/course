@@ -31,7 +31,8 @@ namespace MobilePhoneApp
             var carAudioDevice = new CarAudio(consoleOutput); //This device has both interfaces
             playbackDevices.Add(carAudioDevice);
             chargingDevices.Add(carAudioDevice);
-
+            
+            //TODO: Move choice to separate method
             Console.WriteLine("Following phones are available :");
             int choice = 0;
             foreach (MobilePhone phone in phones)

@@ -13,7 +13,7 @@ namespace MobilePhoneCommon.PlaybackDevices.Tests
     public class IphoneOriginalHeadphonesTests
     {
         [TestMethod()]
-        public void PlayTest()
+        public void IphoneOriginalHeadphonesPlayTest()
         {
             var fakeOutput = new FakeIOutput();
             var device = new IphoneOriginalHeadphones(fakeOutput);

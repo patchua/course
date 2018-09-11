@@ -28,54 +28,59 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Chargers = new System.Windows.Forms.ListBox();
-            this.PlaybackDevices = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnApply = new System.Windows.Forms.Button();
+            this.textBoxOutput = new System.Windows.Forms.TextBox();
+            this.groupBoxChargers = new System.Windows.Forms.GroupBox();
+            this.groupBoxPlaybackDevices = new System.Windows.Forms.GroupBox();
             this.SuspendLayout();
             // 
-            // Chargers
+            // btnApply
             // 
-            this.Chargers.FormattingEnabled = true;
-            this.Chargers.Location = new System.Drawing.Point(3, 6);
-            this.Chargers.Name = "Chargers";
-            this.Chargers.Size = new System.Drawing.Size(280, 173);
-            this.Chargers.TabIndex = 0;
-            this.Chargers.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.btnApply.Location = new System.Drawing.Point(308, 185);
+            this.btnApply.Name = "btnApply";
+            this.btnApply.Size = new System.Drawing.Size(72, 30);
+            this.btnApply.TabIndex = 2;
+            this.btnApply.Text = "Apply";
+            this.btnApply.UseVisualStyleBackColor = true;
+            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
             // 
-            // PlaybackDevices
+            // textBoxOutput
             // 
-            this.PlaybackDevices.FormattingEnabled = true;
-            this.PlaybackDevices.Location = new System.Drawing.Point(0, 212);
-            this.PlaybackDevices.Name = "PlaybackDevices";
-            this.PlaybackDevices.Size = new System.Drawing.Size(282, 173);
-            this.PlaybackDevices.TabIndex = 1;
+            this.textBoxOutput.Location = new System.Drawing.Point(3, 221);
+            this.textBoxOutput.Multiline = true;
+            this.textBoxOutput.Name = "textBoxOutput";
+            this.textBoxOutput.Size = new System.Drawing.Size(713, 175);
+            this.textBoxOutput.TabIndex = 3;
             // 
-            // button1
+            // groupBoxChargers
             // 
-            this.button1.Location = new System.Drawing.Point(303, 173);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(98, 48);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.groupBoxChargers.Location = new System.Drawing.Point(12, 13);
+            this.groupBoxChargers.Name = "groupBoxChargers";
+            this.groupBoxChargers.Size = new System.Drawing.Size(319, 163);
+            this.groupBoxChargers.TabIndex = 6;
+            this.groupBoxChargers.TabStop = false;
+            this.groupBoxChargers.Text = "Charging devices";
             // 
-            // textBox1
+            // groupBoxPlaybackDevices
             // 
-            this.textBox1.Location = new System.Drawing.Point(417, 23);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(257, 20);
-            this.textBox1.TabIndex = 3;
+            this.groupBoxPlaybackDevices.Location = new System.Drawing.Point(338, 13);
+            this.groupBoxPlaybackDevices.Name = "groupBoxPlaybackDevices";
+            this.groupBoxPlaybackDevices.Size = new System.Drawing.Size(378, 163);
+            this.groupBoxPlaybackDevices.TabIndex = 8;
+            this.groupBoxPlaybackDevices.TabStop = false;
+            this.groupBoxPlaybackDevices.Text = "Playback devices";
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(693, 424);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.PlaybackDevices);
-            this.Controls.Add(this.Chargers);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(721, 408);
+            this.Controls.Add(this.groupBoxPlaybackDevices);
+            this.Controls.Add(this.groupBoxChargers);
+            this.Controls.Add(this.textBoxOutput);
+            this.Controls.Add(this.btnApply);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MainWindow";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -84,11 +89,10 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox Chargers;
-        private System.Windows.Forms.ListBox PlaybackDevices;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button btnApply;
+        private System.Windows.Forms.TextBox textBoxOutput;
+        private System.Windows.Forms.GroupBox groupBoxChargers;
+        private System.Windows.Forms.GroupBox groupBoxPlaybackDevices;
     }
 }
 
