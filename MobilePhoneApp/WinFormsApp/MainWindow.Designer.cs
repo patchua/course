@@ -41,10 +41,10 @@
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.textBoxOutput, 2);
             this.textBoxOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxOutput.Location = new System.Drawing.Point(3, 64);
+            this.textBoxOutput.Location = new System.Drawing.Point(3, 50);
             this.textBoxOutput.Multiline = true;
             this.textBoxOutput.Name = "textBoxOutput";
-            this.textBoxOutput.Size = new System.Drawing.Size(602, 277);
+            this.textBoxOutput.Size = new System.Drawing.Size(602, 291);
             this.textBoxOutput.TabIndex = 3;
             // 
             // groupBoxChargers
@@ -54,7 +54,7 @@
             this.groupBoxChargers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxChargers.Location = new System.Drawing.Point(3, 3);
             this.groupBoxChargers.Name = "groupBoxChargers";
-            this.groupBoxChargers.Size = new System.Drawing.Size(72, 19);
+            this.groupBoxChargers.Size = new System.Drawing.Size(72, 5);
             this.groupBoxChargers.TabIndex = 6;
             this.groupBoxChargers.TabStop = false;
             this.groupBoxChargers.Text = "Charging devices";
@@ -62,7 +62,7 @@
             // btnApplyAudio
             // 
             this.btnApplyAudio.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnApplyAudio.Location = new System.Drawing.Point(307, 28);
+            this.btnApplyAudio.Location = new System.Drawing.Point(307, 14);
             this.btnApplyAudio.Name = "btnApplyAudio";
             this.btnApplyAudio.Size = new System.Drawing.Size(72, 30);
             this.btnApplyAudio.TabIndex = 9;
@@ -77,7 +77,7 @@
             this.groupBoxPlaybackDevices.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxPlaybackDevices.Location = new System.Drawing.Point(81, 3);
             this.groupBoxPlaybackDevices.Name = "groupBoxPlaybackDevices";
-            this.groupBoxPlaybackDevices.Size = new System.Drawing.Size(524, 19);
+            this.groupBoxPlaybackDevices.Size = new System.Drawing.Size(524, 5);
             this.groupBoxPlaybackDevices.TabIndex = 8;
             this.groupBoxPlaybackDevices.TabStop = false;
             this.groupBoxPlaybackDevices.Text = "Playback devices";
@@ -85,7 +85,7 @@
             // btnApplyCharger
             // 
             this.btnApplyCharger.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnApplyCharger.Location = new System.Drawing.Point(3, 28);
+            this.btnApplyCharger.Location = new System.Drawing.Point(3, 14);
             this.btnApplyCharger.Name = "btnApplyCharger";
             this.btnApplyCharger.Size = new System.Drawing.Size(72, 30);
             this.btnApplyCharger.TabIndex = 2;
@@ -124,6 +124,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "MainWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MobilePhoneApp";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
