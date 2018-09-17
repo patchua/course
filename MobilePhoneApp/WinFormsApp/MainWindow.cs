@@ -69,15 +69,21 @@ namespace WinFormsApp
         }
 
 
-        private void btnApply_Click(object sender, EventArgs e)
+        private void btnApplyCharger_Click(object sender, EventArgs e)
         {
             var checkedCharger = groupBoxChargers.Controls.OfType<RadioButton>()
                                        .FirstOrDefault(r => r.Checked);
             if (checkedCharger != null)
             {
                 var charger = vChargers.Find(c => String.Equals(c.ToString(), checkedCharger.Text));
+                if (vMobilePhone.ChargerComponent!= null)
+                    vMobilePhone.ChargerComponent = null;
                 vMobilePhone.ChargerComponent = charger;
-            }
+            }            
+        }
+
+        private void btnApplyAudio_Click(object sender, EventArgs e)
+        {
             var checkedPlayback = groupBoxPlaybackDevices.Controls.OfType<RadioButton>()
                                        .FirstOrDefault(r => r.Checked);
             if (checkedPlayback != null)
