@@ -35,7 +35,10 @@ namespace MobilePhoneCommon
 
                 }
                 else
+                {
+                    Screen.Show($"{vChargerComponent.GetType()} charging device has been removed.");
                     vChargerComponent = value;
+                }
             } }
 
         protected MobilePhone( Battery battery, Simcard simcard, IOutput output)
