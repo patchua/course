@@ -41,11 +41,13 @@ namespace MobilePhoneCommon
                 }
             } }
 
+        public SMSProvider SMSProvider { get; }
         protected MobilePhone( Battery battery, Simcard simcard, IOutput output)
         {
             Battery = battery;
             Simcard = simcard;
             Speaker = new PlaybackDevices.PhoneSpeaker(output);
+            SMSProvider = new SMSProvider();
         }
 
         private void Show(IScreenImage image)
