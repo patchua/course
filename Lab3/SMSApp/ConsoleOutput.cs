@@ -1,7 +1,7 @@
 ﻿using MobilePhoneCommon.Components;
 using System;
 
-namespace MobilePhoneApp
+namespace SMSApp
 {
     public class ConsoleOutput : IOutput
     {

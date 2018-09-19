@@ -4,13 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using static SMSApp.Formatting;
+
 
 namespace SMSApp
 {
     public partial class SMSApp : Form
     {
         private MobilePhone vPhone;
-        private delegate string FormatterDelegate(string text);
+        
         private Dictionary<string, FormatterDelegate> vFormatters= new Dictionary<string, FormatterDelegate>();
        
         public SMSApp()
@@ -21,7 +23,7 @@ namespace SMSApp
 
         private void InitializeData()
         {
-            var vOutput = new MobilePhoneApp.ConsoleOutput();
+            var vOutput = new ConsoleOutput();
             vPhone = new SimCorpMobile(new Battery(3000, BatteryType.LiPo), new Simcard("Vodafone", FormFactor.Nano, NetworkType.LTE), vOutput);
             vFormatters.Add("No Formatting", new FormatterDelegate(NoFormat));
             vFormatters.Add("Add time", new FormatterDelegate(FormatWithTime));
@@ -33,23 +35,7 @@ namespace SMSApp
             
             
         }
-        private static string FormatWithTime(string text)
-        {
-            return $"[{DateTime.Now}] {text}";
-        }
-
-        private static string NoFormat(string text)
-        {
-            return text;
-        }
-        private static string UpperCaseFormat(string text)
-        {
-            return text.ToUpper();
-        }
-        private static string LowerCaseFormat(string text)
-        {
-            return text.ToLower();
-        }
+        
         private void SMSProvider_SMSReceived( string e)
         {
             if (IsDisposed) return;
