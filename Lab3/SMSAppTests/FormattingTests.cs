@@ -18,7 +18,7 @@ namespace SMSApp.Tests
             var text = "Simple Text";
             //WHEN
             var output = Formatting.NoFormat(text);
-            //TEHN
+            //THEN
             Assert.AreEqual(text, output);
         }
 
@@ -29,7 +29,7 @@ namespace SMSApp.Tests
             var text = "Simple Text";
             //WHEN
             var output = Formatting.UpperCaseFormat(text);
-            //TEHN
+            //THEN
             Assert.AreEqual("SIMPLE TEXT", output);
         }
     }

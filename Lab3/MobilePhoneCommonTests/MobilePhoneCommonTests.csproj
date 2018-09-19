@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Chargers\IphoneChargerTests.cs" />
     <Compile Include="FakeIOutput.cs" />
+    <Compile Include="MobilePhones\SMSProviderTests.cs" />
     <Compile Include="PlaybackDevices\IphoneOriginalHeadphonesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
