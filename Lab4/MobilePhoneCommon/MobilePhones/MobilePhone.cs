@@ -1,9 +1,6 @@
 ﻿using MobilePhoneCommon.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using MobilePhoneCommon.SMS;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace MobilePhoneCommon
 {

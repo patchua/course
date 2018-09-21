@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MobilePhoneCommon;
+using MobilePhoneCommon.SMS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace MobilePhoneCommon.Tests
         [TestMethod()]
         public void SMSProviderEventTest()
         {
-           string result= null;        
+           Message result= null;        
             var smsProvider = new SMSProvider();
             //GIVEN
             smsProvider.SMSReceived += (s) => { result = s; };

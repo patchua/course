@@ -1,5 +1,6 @@
 ﻿using MobilePhoneCommon;
 using MobilePhoneCommon.Components;
+using MobilePhoneCommon.SMS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,21 +37,21 @@ namespace SMSApp
             
         }
         
-        private void SMSProvider_SMSReceived( string e)
+        private void SMSProvider_SMSReceived(MobilePhoneCommon.SMS.Message msg)
         {
             if (IsDisposed) return;
 
             if (InvokeRequired)
             {
-                Invoke(new SMSProvider.SMSReceivedHandler(SMSProvider_SMSReceived), e);
+                Invoke(new SMSProvider.SMSReceivedHandler(SMSProvider_SMSReceived), msg);
             }
             else
 
             {
                 var formatter = vFormatters.First(f => f.Key == comboBoxFormating.SelectedItem as string).Value;
                 if (formatter!=null )
-                    e = formatter(e);
-                txtBox.AppendText(e);
+                    msg.Body = formatter(msg.Body);
+                txtBox.AppendText(msg.Body);
             }
             
         }
@@ -62,8 +63,7 @@ namespace SMSApp
 
         private void SMSApp_Load(object sender, EventArgs e)
         {
-            var width = CalcDropDownWidth(comboBoxFormating);
-           // comboBoxFormating.DropDownWidth = width;
+            var width = CalcDropDownWidth(comboBoxFormating);          
             comboBoxFormating.Width = width;
         }
 

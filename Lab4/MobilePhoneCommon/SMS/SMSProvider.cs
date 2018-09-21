@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace MobilePhoneCommon
+namespace MobilePhoneCommon.SMS
 {
     public class SMSProvider
     {
-        public delegate void SMSReceivedHandler(string message);
+        public delegate void SMSReceivedHandler(Message message);
         public event SMSReceivedHandler SMSReceived;
         private delegate void StartSMSGate();
         private bool _createSms;
@@ -16,27 +16,29 @@ namespace MobilePhoneCommon
         }
         public void CreateSMS()
         {
-            RaiseSMSReceived("Starting to generate messages \n");
-            _createSms = true;
-            var count = 0;
+            _createSms = true;           
+            var msgGenerator = new RandomMessageGenerator();
             while (_createSms)
             {
-                RaiseSMSReceived($"New message #{++count}! \n");
+                RaiseSMSReceived(msgGenerator.Next());
                 System.Threading.Thread.Sleep(2000);
             }
-            RaiseSMSReceived("Message genearion has been stopped \n");
         }
+        
+
         ~SMSProvider()
         {
             _createSms = false;
 
         }
-        private void RaiseSMSReceived(string msg)
+        private void RaiseSMSReceived(Message msg)
         {
             var handler = SMSReceived;
             if (handler != null)
                 SMSReceived(msg);
         }
+
+       
     }
 
    
