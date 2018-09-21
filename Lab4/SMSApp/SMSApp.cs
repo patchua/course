@@ -3,6 +3,7 @@ using MobilePhoneCommon.Components;
 using MobilePhoneCommon.SMS;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using static SMSApp.Formatting;
@@ -15,6 +16,8 @@ namespace SMSApp
         private MobilePhone vPhone;
         
         private Dictionary<string, FormatterDelegate> vFormatters= new Dictionary<string, FormatterDelegate>();
+        private List<MobilePhoneCommon.SMS.Message> vMsgList;
+        private BindingList<string> vMessageSenders;
        
         public SMSApp()
         {
@@ -32,9 +35,11 @@ namespace SMSApp
             vFormatters.Add("Uppercase", new FormatterDelegate(UpperCaseFormat));
             comboBoxFormating.DataSource = vFormatters.Keys.ToList();
 
+            vMsgList = new List<MobilePhoneCommon.SMS.Message>();
+            vMessageSenders = new BindingList<string>();
             vPhone.SMSProvider.SMSReceived += SMSProvider_SMSReceived;
-            
-            
+
+            messageSender.DataSource = vMessageSenders;
         }
         
         private void SMSProvider_SMSReceived(MobilePhoneCommon.SMS.Message msg)
@@ -48,12 +53,24 @@ namespace SMSApp
             else
 
             {
-                var formatter = vFormatters.First(f => f.Key == comboBoxFormating.SelectedItem as string).Value;
-                if (formatter!=null )
-                    msg.Body = formatter(msg.Body);
-                txtBox.AppendText(msg.Body);
+                vMsgList.Add(msg);
+                if (!vMessageSenders.Contains(msg.Name))
+                    vMessageSenders.Add(msg.Name);
+                //Select messages
+                ShowMessage(msg);              
             }
             
+        }
+
+        private void ShowMessage(List<MobilePhoneCommon.SMS.Message> messages)
+        {
+            var formatter = vFormatters.First(f => f.Key == comboBoxFormating.SelectedItem as string).Value;
+            if (formatter != null)
+                msg.Body = formatter(msg.Body);
+            else 
+                formatter = { }
+            txtBox.AppendText(msg.Body);
+
         }
 
         private void SMSApp_FormClosing(object sender, FormClosingEventArgs e)
