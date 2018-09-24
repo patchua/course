@@ -16,7 +16,8 @@ namespace SMSApp
         private MobilePhone vPhone;
         
         private Dictionary<string, FormatterDelegate> vFormatters= new Dictionary<string, FormatterDelegate>();
-        private List<MobilePhoneCommon.SMS.Message> vMsgList;
+        private List<MobilePhoneCommon.SMS.Message> vAllMsgList;
+        private List<MobilePhoneCommon.SMS.Message> vShownMessageList;
         private BindingList<string> vMessageSenders;
        
         public SMSApp()
@@ -35,11 +36,13 @@ namespace SMSApp
             vFormatters.Add("Uppercase", new FormatterDelegate(UpperCaseFormat));
             comboBoxFormating.DataSource = vFormatters.Keys.ToList();
 
-            vMsgList = new List<MobilePhoneCommon.SMS.Message>();
+            vAllMsgList = new List<MobilePhoneCommon.SMS.Message>();
+            vShownMessageList = new List<MobilePhoneCommon.SMS.Message>();
             vMessageSenders = new BindingList<string>();
             vPhone.SMSProvider.SMSReceived += SMSProvider_SMSReceived;
 
             messageSender.DataSource = vMessageSenders;
+            
         }
         
         private void SMSProvider_SMSReceived(MobilePhoneCommon.SMS.Message msg)
@@ -53,24 +56,85 @@ namespace SMSApp
             else
 
             {
-                vMsgList.Add(msg);
+                vAllMsgList.Add(msg);
                 if (!vMessageSenders.Contains(msg.Name))
                     vMessageSenders.Add(msg.Name);
-                //Select messages
-                ShowMessage(msg);              
+                PrepareShownList();
+                             
             }
             
         }
 
-        private void ShowMessage(List<MobilePhoneCommon.SMS.Message> messages)
-        {
-            var formatter = vFormatters.First(f => f.Key == comboBoxFormating.SelectedItem as string).Value;
-            if (formatter != null)
-                msg.Body = formatter(msg.Body);
-            else 
-                formatter = { }
-            txtBox.AppendText(msg.Body);
+        private void PrepareShownList()
+        {                        
+            var msgList = new List<MobilePhoneCommon.SMS.Message>();
+            if (applyAllFilters.CheckState == CheckState.Checked)
+            {
+                msgList = vAllMsgList
+                    .Where(m => 
+                    (m.Name == messageSender.SelectedItem as string) 
+                    && (m.ReceivingTime > fromDatePicker.Value) 
+                    && (m.ReceivingTime < toDatePicker.Value) 
+                    && (m.Body.Contains(messageFilter.Text)))
+                    .ToList();                
+            }
 
+            if (!EqualLists(msgList, vShownMessageList))
+            {
+                vShownMessageList = new List<MobilePhoneCommon.SMS.Message>(msgList);
+                UpdateShownMessages();
+            }
+        }
+
+        private void UpdateShownMessages()
+        {
+            messageListView.Clear();
+            var formatter = vFormatters.First(f => f.Key == comboBoxFormating.SelectedItem as string).Value;
+            string  body;
+            foreach (MobilePhoneCommon.SMS.Message msg in vShownMessageList)
+            {
+                body = msg.Body;
+                if (formatter != null)
+                    body = formatter(body);
+                messageListView.Items.Add(new ListViewItem(new[] { msg.Name, body }));
+            }
+
+        }
+
+        public static bool EqualLists<T>(List<T> aListA, List<T> aListB)
+        {
+            if (aListA == null || aListB == null || aListA.Count != aListB.Count)
+                return false;
+            if (aListA.Count == 0)
+                return true;
+            Dictionary<T, int> lookUp = new Dictionary<T, int>();
+            // create index for the first list
+            for (int i = 0; i < aListA.Count; i++)
+            {
+                int count = 0;
+                if (!lookUp.TryGetValue(aListA[i], out count))
+                {
+                    lookUp.Add(aListA[i], 1);
+                    continue;
+                }
+                lookUp[aListA[i]] = count + 1;
+            }
+            for (int i = 0; i < aListB.Count; i++)
+            {
+                int count = 0;
+                if (!lookUp.TryGetValue(aListB[i], out count))
+                {
+                    // early exit as the current value in B doesn't exist in the lookUp (and not in ListA)
+                    return false;
+                }
+                count--;
+                if (count <= 0)
+                    lookUp.Remove(aListB[i]);
+                else
+                    lookUp[aListB[i]] = count;
+            }
+            // if there are remaining elements in the lookUp, that means ListA contains elements that do not exist in ListB
+            return lookUp.Count == 0;
         }
 
         private void SMSApp_FormClosing(object sender, FormClosingEventArgs e)

@@ -36,6 +36,8 @@
             this.messageFilter = new System.Windows.Forms.TextBox();
             this.comboBoxFormating = new System.Windows.Forms.ComboBox();
             this.applyAllFilters = new System.Windows.Forms.CheckBox();
+            this.NameCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.TextCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -82,6 +84,9 @@
             // 
             // messageListView
             // 
+            this.messageListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.NameCol,
+            this.TextCol});
             this.tableLayoutPanel1.SetColumnSpan(this.messageListView, 3);
             this.messageListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.messageListView.Location = new System.Drawing.Point(3, 83);
@@ -137,7 +142,7 @@
             this.ClientSize = new System.Drawing.Size(661, 556);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "SMSApp";
-            this.Text = "Form1";
+            this.Text = "SMS App";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SMSApp_FormClosing);
             this.Load += new System.EventHandler(this.SMSApp_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -156,6 +161,8 @@
         private System.Windows.Forms.ComboBox messageSender;
         private System.Windows.Forms.TextBox messageFilter;
         private System.Windows.Forms.CheckBox applyAllFilters;
+        private System.Windows.Forms.ColumnHeader NameCol;
+        private System.Windows.Forms.ColumnHeader TextCol;
     }
 }
 
