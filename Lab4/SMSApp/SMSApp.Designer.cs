@@ -36,6 +36,8 @@
             this.messageFilter = new System.Windows.Forms.TextBox();
             this.comboBoxFormating = new System.Windows.Forms.ComboBox();
             this.applyAllFilters = new System.Windows.Forms.CheckBox();
+            this.columnName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnBody = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -82,14 +84,18 @@
             // 
             // messageListView
             // 
+            this.messageListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnName,
+            this.columnBody});
             this.tableLayoutPanel1.SetColumnSpan(this.messageListView, 3);
             this.messageListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.messageListView.GridLines = true;
             this.messageListView.Location = new System.Drawing.Point(3, 83);
             this.messageListView.Name = "messageListView";
             this.messageListView.Size = new System.Drawing.Size(655, 470);
             this.messageListView.TabIndex = 4;
             this.messageListView.UseCompatibleStateImageBehavior = false;
-            this.messageListView.View = System.Windows.Forms.View.Tile;
+            this.messageListView.View = System.Windows.Forms.View.List;
             // 
             // messageSender
             // 
@@ -130,6 +136,14 @@
             this.applyAllFilters.Text = "Apply all filters simultaneously";
             this.applyAllFilters.UseVisualStyleBackColor = true;
             // 
+            // columnName
+            // 
+            this.columnName.Text = "Name";
+            // 
+            // columnBody
+            // 
+            this.columnBody.Text = "Body";
+            // 
             // SMSApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -156,6 +170,8 @@
         private System.Windows.Forms.ComboBox messageSender;
         private System.Windows.Forms.TextBox messageFilter;
         private System.Windows.Forms.CheckBox applyAllFilters;
+        private System.Windows.Forms.ColumnHeader columnName;
+        private System.Windows.Forms.ColumnHeader columnBody;
     }
 }
 

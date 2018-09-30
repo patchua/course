@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using static SMSApp.Formatting;
-
+using static System.Windows.Forms.ListViewItem;
 
 namespace SMSApp
 {
@@ -16,9 +16,10 @@ namespace SMSApp
         private MobilePhone vPhone;
         
         private Dictionary<string, FormatterDelegate> vFormatters= new Dictionary<string, FormatterDelegate>();
-        private List<MobilePhoneCommon.SMS.Message> vMsgList;
-        private BindingList<string> vMessageSenders;
-       
+        private List<MobilePhoneCommon.SMS.Message> vAllMsgList = new List<MobilePhoneCommon.SMS.Message>();
+        private BindingList<string> vMessageSenders = new BindingList<string>();
+        private List<MobilePhoneCommon.SMS.Message> vShownMessageList= new List<MobilePhoneCommon.SMS.Message>();
+        
         public SMSApp()
         {
             InitializeComponent();
@@ -35,8 +36,7 @@ namespace SMSApp
             vFormatters.Add("Uppercase", new FormatterDelegate(UpperCaseFormat));
             comboBoxFormating.DataSource = vFormatters.Keys.ToList();
 
-            vMsgList = new List<MobilePhoneCommon.SMS.Message>();
-            vMessageSenders = new BindingList<string>();
+  
             vPhone.SMSProvider.SMSReceived += SMSProvider_SMSReceived;
 
             messageSender.DataSource = vMessageSenders;
@@ -53,23 +53,59 @@ namespace SMSApp
             else
 
             {
-                vMsgList.Add(msg);
+                vAllMsgList.Add(msg);
                 if (!vMessageSenders.Contains(msg.Name))
                     vMessageSenders.Add(msg.Name);
-                //Select messages
-                ShowMessage(msg);              
+                UpdateShownMessagesList();
+                              
             }
             
         }
 
-        private void ShowMessage(List<MobilePhoneCommon.SMS.Message> messages)
+        private void UpdateShownMessagesList()
         {
+            var messages = vAllMsgList.Where(m => m.Name == messageSender.SelectedItem as string);
+            if (!EqualList(messages.ToList(), vAllMsgList))
+            {
+                vShownMessageList = new List<MobilePhoneCommon.SMS.Message>(messages);
+                UpdateShownMessageListView();
+            }
+
+        }
+
+        private bool EqualList<T>(List<T> listA, List<T> listB)
+        {
+            if (listA == null || listB == null)
+                return false;
+
+            if (listA.Count != listB.Count)
+                return false;
+
+            foreach (var elm in listA)
+                if (!listB.Contains(elm))
+                    return false;
+
+            foreach (var elm in listB)
+                if (!listA.Contains(elm))
+                    return false;
+            return true;
+        }
+
+        private void UpdateShownMessageListView()
+        {
+            messageListView.Clear();
             var formatter = vFormatters.First(f => f.Key == comboBoxFormating.SelectedItem as string).Value;
-            if (formatter != null)
-                msg.Body = formatter(msg.Body);
-            else 
-                formatter = { }
-            txtBox.AppendText(msg.Body);
+            foreach (var msg in vShownMessageList)
+            {
+                var body = msg.Body;
+                if (formatter != null)
+                    body = formatter(body);
+                ListViewSubItem itm = new ListViewSubItem();
+                itm.SubItems.Add(msg.Name);
+                itm.SubItems.Add(body);
+                //messageListView.Items.Add(new ListViewItem( new[] { msg.Name, body }));
+                messageListView.Items.Add(itm);
+            }
 
         }
 
