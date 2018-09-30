@@ -11,16 +11,17 @@ using static System.Windows.Forms.ListViewItem;
 
 namespace SMSApp
 {
-    public partial class SMSApp : Form
+    public partial class MainForm : Form
     {
         private MobilePhone vPhone;
         
-        private Dictionary<string, FormatterDelegate> vFormatters= new Dictionary<string, FormatterDelegate>();
+        private Dictionary<string, FormattingDelegate> vFormatters= new Dictionary<string, FormattingDelegate>();
         private List<MobilePhoneCommon.SMS.Message> vAllMsgList = new List<MobilePhoneCommon.SMS.Message>();
         private BindingList<string> vMessageSenders = new BindingList<string>();
-        private List<MobilePhoneCommon.SMS.Message> vShownMessageList= new List<MobilePhoneCommon.SMS.Message>();
+        private List<MobilePhoneCommon.SMS.Message> vShownMessageList = new List<MobilePhoneCommon.SMS.Message>();
+        private BindingList<MessageView> vShownMessageViewList= new BindingList<MessageView>();
         
-        public SMSApp()
+        public MainForm()
         {
             InitializeComponent();
             InitializeData();
@@ -30,13 +31,12 @@ namespace SMSApp
         {
             var vOutput = new ConsoleOutput();
             vPhone = new SimCorpMobile(new Battery(3000, BatteryType.LiPo), new Simcard("Vodafone", FormFactor.Nano, NetworkType.LTE), vOutput);
-            vFormatters.Add("No Formatting", new FormatterDelegate(NoFormat));
-            vFormatters.Add("Add time", new FormatterDelegate(FormatWithTime));
-            vFormatters.Add("Lowercase", new FormatterDelegate(LowerCaseFormat));
-            vFormatters.Add("Uppercase", new FormatterDelegate(UpperCaseFormat));
+            vFormatters.Add("No Formatting", NoFormat);
+            vFormatters.Add("Add time", FormatWithTime);
+            vFormatters.Add("Lowercase", LowerCaseFormat);
+            vFormatters.Add("Uppercase", UpperCaseFormat);
             comboBoxFormating.DataSource = vFormatters.Keys.ToList();
-
-  
+            messageView.DataSource = new BindingSource(vShownMessageViewList, null);
             vPhone.SMSProvider.SMSReceived += SMSProvider_SMSReceived;
 
             messageSender.DataSource = vMessageSenders;
@@ -56,21 +56,37 @@ namespace SMSApp
                 vAllMsgList.Add(msg);
                 if (!vMessageSenders.Contains(msg.Name))
                     vMessageSenders.Add(msg.Name);
-                UpdateShownMessagesList();
+                UpdateShownMessageView();
                               
             }
             
         }
 
-        private void UpdateShownMessagesList()
-        {
-            var messages = vAllMsgList.Where(m => m.Name == messageSender.SelectedItem as string);
-            if (!EqualList(messages.ToList(), vAllMsgList))
-            {
-                vShownMessageList = new List<MobilePhoneCommon.SMS.Message>(messages);
-                UpdateShownMessageListView();
-            }
+       
 
+        private void UpdateShownMessageView()
+        {
+       
+            if (applyAllFilters.Checked)
+                vShownMessageList = vAllMsgList.Where(m => m.Name == messageSender.SelectedItem as string)
+                    .Where(m => m.ReceivingTime > fromDatePicker.Value)
+                    .Where(m => m.ReceivingTime < toDatePicker.Value)
+                    .Where(m => m.Body.Contains(messageFilter.Text))
+                    .ToList();
+            else
+                vShownMessageList = vAllMsgList.Where(m => (m.Name == messageSender.SelectedItem as string) ||
+                     (m.ReceivingTime > fromDatePicker.Value) ||
+                     (m.ReceivingTime < toDatePicker.Value) ||
+                     (m.Body.Contains(messageFilter.Text)))
+                     .ToList();
+
+            var formatter = vFormatters.First(f => f.Key == comboBoxFormating.SelectedItem as string).Value;
+            vShownMessageViewList.Clear();
+            foreach (var msg in vShownMessageList)
+            {
+                var fmsg = (formatter == null) ? msg : formatter(msg);
+                vShownMessageViewList.Add(new MessageView(fmsg));
+            }
         }
 
         private bool EqualList<T>(List<T> listA, List<T> listB)
@@ -91,23 +107,6 @@ namespace SMSApp
             return true;
         }
 
-        private void UpdateShownMessageListView()
-        {
-            messageListView.Clear();
-            var formatter = vFormatters.First(f => f.Key == comboBoxFormating.SelectedItem as string).Value;
-            foreach (var msg in vShownMessageList)
-            {
-                var body = msg.Body;
-                if (formatter != null)
-                    body = formatter(body);
-                ListViewSubItem itm = new ListViewSubItem();
-                itm.SubItems.Add(msg.Name);
-                itm.SubItems.Add(body);
-                //messageListView.Items.Add(new ListViewItem( new[] { msg.Name, body }));
-                messageListView.Items.Add(itm);
-            }
-
-        }
 
         private void SMSApp_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -137,6 +136,43 @@ namespace SMSApp
             }
             label.Dispose();
             return maxWidth;
+        }
+        private class MessageView
+        {
+
+            public MessageView(MobilePhoneCommon.SMS.Message msg)
+            {
+                Name = msg.Name;
+                Text = msg.Body;
+            }
+
+            public string  Name { get; set; }
+            public string Text { get; set; }
+        }
+
+        private void applyAllFilters_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateShownMessageView();
+        }
+
+        private void fromDatePicker_ValueChanged(object sender, EventArgs e)
+        {
+            UpdateShownMessageView();
+        }
+
+        private void toDatePicker_ValueChanged(object sender, EventArgs e)
+        {
+            UpdateShownMessageView();
+        }
+
+        private void messageSender_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateShownMessageView();
+        }
+
+        private void messageFilter_TextChanged(object sender, EventArgs e)
+        {
+            UpdateShownMessageView();
         }
     }
 }

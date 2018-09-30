@@ -16,7 +16,7 @@ namespace SMSApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SMSApp());
+            Application.Run(new MainForm());
         }
     }
 }

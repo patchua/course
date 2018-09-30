@@ -1,6 +1,6 @@
 ﻿namespace SMSApp
 {
-    partial class SMSApp
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,43 +28,44 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.layoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.fromDatePicker = new System.Windows.Forms.DateTimePicker();
             this.toDatePicker = new System.Windows.Forms.DateTimePicker();
-            this.messageListView = new System.Windows.Forms.ListView();
             this.messageSender = new System.Windows.Forms.ComboBox();
             this.messageFilter = new System.Windows.Forms.TextBox();
             this.comboBoxFormating = new System.Windows.Forms.ComboBox();
             this.applyAllFilters = new System.Windows.Forms.CheckBox();
-            this.columnName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnBody = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.tableLayoutPanel1.SuspendLayout();
+            this.messageView = new System.Windows.Forms.DataGridView();
+            this.layoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.messageView)).BeginInit();
             this.SuspendLayout();
             // 
-            // tableLayoutPanel1
+            // layoutPanel
             // 
-            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.fromDatePicker, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.toDatePicker, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.messageListView, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.messageSender, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.messageFilter, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.comboBoxFormating, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.applyAllFilters, 0, 2);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(661, 556);
-            this.tableLayoutPanel1.TabIndex = 0;
+            this.layoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.layoutPanel.ColumnCount = 3;
+            this.layoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.layoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.layoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.layoutPanel.Controls.Add(this.fromDatePicker, 1, 2);
+            this.layoutPanel.Controls.Add(this.toDatePicker, 2, 2);
+            this.layoutPanel.Controls.Add(this.messageSender, 1, 0);
+            this.layoutPanel.Controls.Add(this.messageFilter, 1, 1);
+            this.layoutPanel.Controls.Add(this.comboBoxFormating, 0, 1);
+            this.layoutPanel.Controls.Add(this.applyAllFilters, 0, 2);
+            this.layoutPanel.Controls.Add(this.messageView, 0, 3);
+            this.layoutPanel.Cursor = System.Windows.Forms.Cursors.Default;
+            this.layoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.layoutPanel.Location = new System.Drawing.Point(0, 0);
+            this.layoutPanel.Name = "layoutPanel";
+            this.layoutPanel.RowCount = 4;
+            this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.layoutPanel.Size = new System.Drawing.Size(661, 556);
+            this.layoutPanel.TabIndex = 0;
             // 
             // fromDatePicker
             // 
@@ -73,6 +74,7 @@
             this.fromDatePicker.Name = "fromDatePicker";
             this.fromDatePicker.Size = new System.Drawing.Size(200, 20);
             this.fromDatePicker.TabIndex = 2;
+            this.fromDatePicker.ValueChanged += new System.EventHandler(this.fromDatePicker_ValueChanged);
             // 
             // toDatePicker
             // 
@@ -81,40 +83,28 @@
             this.toDatePicker.Name = "toDatePicker";
             this.toDatePicker.Size = new System.Drawing.Size(200, 20);
             this.toDatePicker.TabIndex = 3;
-            // 
-            // messageListView
-            // 
-            this.messageListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnName,
-            this.columnBody});
-            this.tableLayoutPanel1.SetColumnSpan(this.messageListView, 3);
-            this.messageListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.messageListView.GridLines = true;
-            this.messageListView.Location = new System.Drawing.Point(3, 83);
-            this.messageListView.Name = "messageListView";
-            this.messageListView.Size = new System.Drawing.Size(655, 470);
-            this.messageListView.TabIndex = 4;
-            this.messageListView.UseCompatibleStateImageBehavior = false;
-            this.messageListView.View = System.Windows.Forms.View.List;
+            this.toDatePicker.ValueChanged += new System.EventHandler(this.toDatePicker_ValueChanged);
             // 
             // messageSender
             // 
             this.messageSender.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.tableLayoutPanel1.SetColumnSpan(this.messageSender, 2);
+            this.layoutPanel.SetColumnSpan(this.messageSender, 2);
             this.messageSender.FormattingEnabled = true;
             this.messageSender.Location = new System.Drawing.Point(537, 3);
             this.messageSender.Name = "messageSender";
             this.messageSender.Size = new System.Drawing.Size(121, 21);
             this.messageSender.TabIndex = 5;
+            this.messageSender.SelectedIndexChanged += new System.EventHandler(this.messageSender_SelectedIndexChanged);
             // 
             // messageFilter
             // 
             this.messageFilter.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.tableLayoutPanel1.SetColumnSpan(this.messageFilter, 2);
+            this.layoutPanel.SetColumnSpan(this.messageFilter, 2);
             this.messageFilter.Location = new System.Drawing.Point(558, 30);
             this.messageFilter.Name = "messageFilter";
             this.messageFilter.Size = new System.Drawing.Size(100, 20);
             this.messageFilter.TabIndex = 6;
+            this.messageFilter.TextChanged += new System.EventHandler(this.messageFilter_TextChanged);
             // 
             // comboBoxFormating
             // 
@@ -135,43 +125,48 @@
             this.applyAllFilters.TabIndex = 7;
             this.applyAllFilters.Text = "Apply all filters simultaneously";
             this.applyAllFilters.UseVisualStyleBackColor = true;
+            this.applyAllFilters.CheckedChanged += new System.EventHandler(this.applyAllFilters_CheckedChanged);
             // 
-            // columnName
+            // messageView
             // 
-            this.columnName.Text = "Name";
+            this.messageView.AllowUserToAddRows = false;
+            this.messageView.AllowUserToDeleteRows = false;
+            this.messageView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.layoutPanel.SetColumnSpan(this.messageView, 3);
+            this.messageView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.messageView.Location = new System.Drawing.Point(3, 83);
+            this.messageView.Name = "messageView";
+            this.messageView.ReadOnly = true;
+            this.messageView.Size = new System.Drawing.Size(655, 470);
+            this.messageView.TabIndex = 8;
             // 
-            // columnBody
-            // 
-            this.columnBody.Text = "Body";
-            // 
-            // SMSApp
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(661, 556);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "SMSApp";
-            this.Text = "Form1";
+            this.Controls.Add(this.layoutPanel);
+            this.Name = "MainForm";
+            this.Text = "SMA Viewer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SMSApp_FormClosing);
             this.Load += new System.EventHandler(this.SMSApp_Load);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.layoutPanel.ResumeLayout(false);
+            this.layoutPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.messageView)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel layoutPanel;
         private System.Windows.Forms.ComboBox comboBoxFormating;
         private System.Windows.Forms.DateTimePicker fromDatePicker;
         private System.Windows.Forms.DateTimePicker toDatePicker;
-        private System.Windows.Forms.ListView messageListView;
         private System.Windows.Forms.ComboBox messageSender;
         private System.Windows.Forms.TextBox messageFilter;
         private System.Windows.Forms.CheckBox applyAllFilters;
-        private System.Windows.Forms.ColumnHeader columnName;
-        private System.Windows.Forms.ColumnHeader columnBody;
+        private System.Windows.Forms.DataGridView messageView;
     }
 }
 

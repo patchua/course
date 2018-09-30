@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MobilePhoneCommon.SMS;
 using SMSApp;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,10 @@ namespace SMSApp.Tests
         {
             //GIVEN
             var text = "Simple Text";
+            Message msg = new Message();
+            msg.Body = text;
             //WHEN
-            var output = Formatting.NoFormat(text);
+            var output = Formatting.NoFormat(msg).Body;
             //THEN
             Assert.AreEqual(text, output);
         }
@@ -27,8 +30,11 @@ namespace SMSApp.Tests
         {
             //GIVEN
             var text = "Simple Text";
+            Message msg = new Message();
+            msg.Body = text;
+
             //WHEN
-            var output = Formatting.UpperCaseFormat(text);
+            var output = Formatting.UpperCaseFormat(msg).Body;
             //THEN
             Assert.AreEqual("SIMPLE TEXT", output);
         }

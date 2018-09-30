@@ -55,6 +55,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MobilePhoneCommon\MobilePhoneCommon.csproj">
+      <Project>{5e89f0db-7215-40c5-862e-da344b960d40}</Project>
+      <Name>MobilePhoneCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SMSApp\SMSApp.csproj">
       <Project>{4EEE18EC-F1E4-460F-BA29-73B130B5BF4A}</Project>
       <Name>SMSApp</Name>

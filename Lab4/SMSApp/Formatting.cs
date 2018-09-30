@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MobilePhoneCommon.SMS;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,23 +9,38 @@ namespace SMSApp
 {
     public static  class Formatting
     {
-         public delegate string FormatterDelegate(string text);
-         public static string FormatWithTime(string text)
+        private static Message CopyMessage(Message message)
         {
-            return $"[{DateTime.Now}] {text}";
+            Message newMessage = new Message();
+            newMessage.Name = message.Name;
+            newMessage.Operator = message.Operator;
+            newMessage.ReceivingTime = message.ReceivingTime;
+            newMessage.Body = message.Body;
+            return newMessage;
+        }
+        public delegate Message FormattingDelegate(Message message);
+         public static Message FormatWithTime(Message message)
+        {
+            var nMessage = CopyMessage(message);
+            nMessage.Body=$"[{message.ReceivingTime}] {message.Body}";
+            return nMessage;
         }
 
-         public static string NoFormat(string text)
+         public static Message NoFormat(Message message)
         {
-            return text;
+            return CopyMessage(message);
         }
-         public static string UpperCaseFormat(string text)
+         public static Message UpperCaseFormat(Message message)
         {
-            return text.ToUpper();
+            var nMessage = CopyMessage(message);
+            nMessage.Body=nMessage.Body.ToUpper();
+            return nMessage;
         }
-         public static string LowerCaseFormat(string text)
+         public static Message LowerCaseFormat(Message message)
         {
-            return text.ToLower();
+            var nMessage = CopyMessage(message);
+            nMessage.Body=nMessage.Body.ToLower();
+            return nMessage;
         }
     }
 }
