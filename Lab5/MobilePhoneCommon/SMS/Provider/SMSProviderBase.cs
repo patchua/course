@@ -3,33 +3,17 @@ using System.Threading;
 
 namespace MobilePhoneCommon.SMS
 {
-    public class SMSProvider
+    public abstract class SMSProviderBase
     {
         public delegate void SMSReceivedHandler(Message message);
         public event SMSReceivedHandler SMSReceived;       
-        private bool _createSMS;       
-       
-        public void Start()
-        {
-            _createSMS= true;            
-            try
-            {
-                Thread thread = new Thread(CreateSMS);
-                thread.Start();
-            }
-            catch (ThreadStateException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            
-        }
+        protected bool _createSMS;
 
-        public void Stop()
-        {
-            _createSMS = false;
-        }
+        public abstract void Start();
 
-        private void CreateSMS()
+        public abstract void Stop();
+        
+        protected void CreateSMS()
         {
             var msgGenerator = new RandomMessageGenerator();            
             while (_createSMS)

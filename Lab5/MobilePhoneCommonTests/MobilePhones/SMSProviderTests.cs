@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MobilePhoneCommon;
 using MobilePhoneCommon.SMS;
+using MobilePhoneCommon.SMS.Provider;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +22,7 @@ namespace MobilePhoneCommon.Tests
             smsProvider.SMSReceived += (s) => { result = s; };
 
             //WHEN
-            //Event creation is started right in the constructor
-
+            smsProvider.Start();
             //THEN
             Assert.IsNull(result);
         }

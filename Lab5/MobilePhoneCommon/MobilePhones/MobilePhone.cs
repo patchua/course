@@ -3,6 +3,7 @@ using MobilePhoneCommon.SMS;
 using System.Text;
 using System.Threading;
 using System;
+using MobilePhoneCommon.SMS.Provider;
 
 namespace MobilePhoneCommon
 {
@@ -40,7 +41,7 @@ namespace MobilePhoneCommon
                 }
             } }
 
-        public SMSProvider SMSProvider { get; }
+        public SMSProviderBase SMSProvider { get; }
         protected MobilePhone( Battery battery, Simcard simcard, IOutput output)
         {
             Battery = battery;

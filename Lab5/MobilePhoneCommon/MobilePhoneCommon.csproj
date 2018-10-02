@@ -60,8 +60,10 @@
     <Compile Include="MobilePhones\Nokia3310.cs" />
     <Compile Include="MobilePhones\SimCorpMobile.cs" />
     <Compile Include="SMS\Message.cs" />
+    <Compile Include="SMS\Provider\SMSProviderTasks.cs" />
+    <Compile Include="SMS\Provider\SMSProviderBase.cs" />
     <Compile Include="SMS\RandomMessageGenerator.cs" />
-    <Compile Include="SMS\SMSProvider.cs" />
+    <Compile Include="SMS\Provider\SMSProvider.cs" />
     <Compile Include="OtherDevices\CarAudio.cs" />
     <Compile Include="PlaybackDevices\IphoneOriginalHeadphones.cs" />
     <Compile Include="PlaybackDevices\PhoneSpeaker.cs" />

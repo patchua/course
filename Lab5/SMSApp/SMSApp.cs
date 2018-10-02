@@ -2,6 +2,7 @@
 using MobilePhoneCommon.Chargers;
 using MobilePhoneCommon.Components;
 using MobilePhoneCommon.SMS;
+using MobilePhoneCommon.SMS.Provider;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
