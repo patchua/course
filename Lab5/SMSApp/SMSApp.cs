@@ -1,4 +1,5 @@
 ﻿using MobilePhoneCommon;
+using MobilePhoneCommon.Chargers;
 using MobilePhoneCommon.Components;
 using MobilePhoneCommon.SMS;
 using System;
@@ -14,7 +15,7 @@ namespace SMSApp
     public partial class MainForm : Form
     {
         private MobilePhone vPhone;
-        
+        private IOutput vOutput = new ConsoleOutput();
         private Dictionary<string, FormattingDelegate> vFormatters= new Dictionary<string, FormattingDelegate>();
         private List<MobilePhoneCommon.SMS.Message> vAllMsgList = new List<MobilePhoneCommon.SMS.Message>();
         private BindingList<string> vMessageSenders = new BindingList<string>();
@@ -28,9 +29,10 @@ namespace SMSApp
         }
 
         private void InitializeData()
-        {
-            var vOutput = new ConsoleOutput();
-            vPhone = new SimCorpMobile(new Battery(3000, BatteryType.LiPo), new Simcard("Vodafone", FormFactor.Nano, NetworkType.LTE), vOutput);            
+        {            
+            vPhone = new SimCorpMobile(new Battery(3000, BatteryType.LiPo), new Simcard("Vodafone", FormFactor.Nano, NetworkType.LTE), vOutput);
+            vPhone.TurnOn();
+            progressBarCharge.Value = vPhone.Battery.Charge;          
             vFormatters.Add("No Formatting", NoFormat);
             vFormatters.Add("Add time", FormatWithTime);
             vFormatters.Add("Lowercase", LowerCaseFormat);
@@ -38,9 +40,38 @@ namespace SMSApp
             comboBoxFormating.DataSource = vFormatters.Keys.ToList();
             messageView.DataSource = new BindingSource(vShownMessageViewList, null);
             vPhone.SMSProvider.SMSReceived += SMSProvider_SMSReceived;
+            vPhone.Battery.ChargeChanged += Battery_ChargeChanged;
             messageSender.DataSource = vMessageSenders;            
         }
-        
+
+        private void Battery_ChargeChanged(int value)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action<int>(Battery_ChargeChanged), value);
+            }
+            else
+            {
+                progressBarCharge.Value = value;
+                //Insert  or remove charger  
+                if (value <= 0)
+                {
+                    MessageBox.Show("Battery is empty. Phone would be turned off");
+                    vPhone.TurnOff();
+                }
+                else if ((value < 20) && (vPhone.ChargerComponent == null))
+                {
+                    MessageBox.Show("Battery is low. Charger would be inserted");
+                    vPhone.ChargerComponent = new IphoneCharger(vOutput);
+                }
+                else if ((value > 80) && (vPhone.ChargerComponent != null))
+                {
+                    MessageBox.Show("Battery is charged. Charger would be removed");
+                    vPhone.ChargerComponent = null;
+                }
+            }
+        }
+
         private void SMSProvider_SMSReceived(MobilePhoneCommon.SMS.Message msg)
         {
             if (IsDisposed) return;
@@ -102,6 +133,7 @@ namespace SMSApp
         private void SMSApp_FormClosing(object sender, FormClosingEventArgs e)
         {
             vPhone.SMSProvider.SMSReceived -= SMSProvider_SMSReceived;
+            vPhone.TurnOff();
         }
 
         private void SMSApp_Load(object sender, EventArgs e)

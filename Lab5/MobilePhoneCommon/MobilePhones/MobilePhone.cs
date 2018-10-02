@@ -1,13 +1,15 @@
 ﻿using MobilePhoneCommon.Components;
 using MobilePhoneCommon.SMS;
 using System.Text;
+using System.Threading;
+using System;
 
 namespace MobilePhoneCommon
 {
     public abstract class MobilePhone
     {
         private ICharge vChargerComponent;
-
+        private bool _phoneIsOperating;
         public abstract ScreenBase Screen { get; }
         public abstract Keyboard Keyboard { get; }
         public Battery Battery {get; }
@@ -44,7 +46,19 @@ namespace MobilePhoneCommon
             Battery = battery;
             Simcard = simcard;
             Speaker = new PlaybackDevices.PhoneSpeaker(output);
-            SMSProvider = new SMSProvider();           
+            SMSProvider = new SMSProvider();                      
+        }
+
+        private void DischangeBattery()
+        {
+            while (_phoneIsOperating)
+            {
+                lock (Battery)
+                {
+                    Battery.Charge -= 1;
+                    Thread.Sleep(1000);
+                }
+            }
         }
 
         private void Show(IScreenImage image)
@@ -70,5 +84,16 @@ namespace MobilePhoneCommon
                 Speaker.Play(data);
         }
 
+        public void TurnOn()
+        {
+            _phoneIsOperating = true;
+            new Thread(DischangeBattery).Start();
+            SMSProvider.Start();
+        }
+        public void TurnOff()
+        {
+            _phoneIsOperating = false;
+            SMSProvider.Stop();
+        }
     }
 }

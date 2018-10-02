@@ -8,6 +8,28 @@ namespace MobilePhoneCommon.Components
 {
     public class Battery
     {
+        public event Action<int> ChargeChanged;
+        private int _charge;
+        public int Charge {
+            get
+            {
+                return _charge;
+            }
+
+            set
+            {
+                OnChargeChanged();
+                _charge = value;
+            }
+        }
+
+        private void OnChargeChanged()
+        {
+            var handler = ChargeChanged;
+            if (handler != null)
+                ChargeChanged(_charge);
+        }
+    
         public int Capacity { get; }
         public BatteryType Type { get;  }
         public double ChargingVoltage { get
@@ -27,6 +49,7 @@ namespace MobilePhoneCommon.Components
         {
             Capacity = cap;
             Type = type;
+            _charge = 30;
         }
 
         public override string ToString()

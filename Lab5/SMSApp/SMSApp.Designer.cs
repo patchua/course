@@ -37,6 +37,7 @@
             this.applyAllFilters = new System.Windows.Forms.CheckBox();
             this.messageView = new System.Windows.Forms.DataGridView();
             this.btnSMS = new System.Windows.Forms.Button();
+            this.progressBarCharge = new System.Windows.Forms.ProgressBar();
             this.layoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.messageView)).BeginInit();
             this.SuspendLayout();
@@ -51,11 +52,12 @@
             this.layoutPanel.Controls.Add(this.fromDatePicker, 1, 2);
             this.layoutPanel.Controls.Add(this.toDatePicker, 2, 2);
             this.layoutPanel.Controls.Add(this.messageSender, 1, 0);
-            this.layoutPanel.Controls.Add(this.messageFilter, 1, 1);
-            this.layoutPanel.Controls.Add(this.comboBoxFormating, 0, 1);
-            this.layoutPanel.Controls.Add(this.applyAllFilters, 0, 2);
             this.layoutPanel.Controls.Add(this.messageView, 0, 3);
-            this.layoutPanel.Controls.Add(this.btnSMS, 0, 0);
+            this.layoutPanel.Controls.Add(this.messageFilter, 2, 1);
+            this.layoutPanel.Controls.Add(this.applyAllFilters, 1, 1);
+            this.layoutPanel.Controls.Add(this.comboBoxFormating, 0, 2);
+            this.layoutPanel.Controls.Add(this.btnSMS, 0, 1);
+            this.layoutPanel.Controls.Add(this.progressBarCharge, 0, 0);
             this.layoutPanel.Cursor = System.Windows.Forms.Cursors.Default;
             this.layoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutPanel.Location = new System.Drawing.Point(0, 0);
@@ -72,7 +74,7 @@
             // fromDatePicker
             // 
             this.fromDatePicker.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.fromDatePicker.Location = new System.Drawing.Point(172, 59);
+            this.fromDatePicker.Location = new System.Drawing.Point(130, 61);
             this.fromDatePicker.Name = "fromDatePicker";
             this.fromDatePicker.ShowCheckBox = true;
             this.fromDatePicker.Size = new System.Drawing.Size(200, 20);
@@ -82,7 +84,7 @@
             // toDatePicker
             // 
             this.toDatePicker.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.toDatePicker.Location = new System.Drawing.Point(418, 59);
+            this.toDatePicker.Location = new System.Drawing.Point(397, 61);
             this.toDatePicker.Name = "toDatePicker";
             this.toDatePicker.ShowCheckBox = true;
             this.toDatePicker.Size = new System.Drawing.Size(200, 20);
@@ -103,8 +105,7 @@
             // messageFilter
             // 
             this.messageFilter.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.layoutPanel.SetColumnSpan(this.messageFilter, 2);
-            this.messageFilter.Location = new System.Drawing.Point(558, 32);
+            this.messageFilter.Location = new System.Drawing.Point(558, 33);
             this.messageFilter.Name = "messageFilter";
             this.messageFilter.Size = new System.Drawing.Size(100, 20);
             this.messageFilter.TabIndex = 6;
@@ -114,7 +115,7 @@
             // 
             this.comboBoxFormating.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.comboBoxFormating.FormattingEnabled = true;
-            this.comboBoxFormating.Location = new System.Drawing.Point(24, 32);
+            this.comboBoxFormating.Location = new System.Drawing.Point(3, 61);
             this.comboBoxFormating.Name = "comboBoxFormating";
             this.comboBoxFormating.Size = new System.Drawing.Size(121, 21);
             this.comboBoxFormating.TabIndex = 0;
@@ -123,7 +124,7 @@
             // 
             this.applyAllFilters.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.applyAllFilters.AutoSize = true;
-            this.applyAllFilters.Location = new System.Drawing.Point(3, 60);
+            this.applyAllFilters.Location = new System.Drawing.Point(148, 35);
             this.applyAllFilters.Name = "applyAllFilters";
             this.applyAllFilters.Size = new System.Drawing.Size(163, 17);
             this.applyAllFilters.TabIndex = 7;
@@ -138,7 +139,7 @@
             this.messageView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.layoutPanel.SetColumnSpan(this.messageView, 3);
             this.messageView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.messageView.Location = new System.Drawing.Point(3, 85);
+            this.messageView.Location = new System.Drawing.Point(3, 88);
             this.messageView.Name = "messageView";
             this.messageView.ReadOnly = true;
             this.messageView.Size = new System.Drawing.Size(655, 470);
@@ -147,13 +148,21 @@
             // btnSMS
             // 
             this.btnSMS.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSMS.Location = new System.Drawing.Point(47, 3);
+            this.btnSMS.Location = new System.Drawing.Point(26, 32);
             this.btnSMS.Name = "btnSMS";
             this.btnSMS.Size = new System.Drawing.Size(75, 23);
             this.btnSMS.TabIndex = 9;
             this.btnSMS.Text = "Start SMS";
             this.btnSMS.UseVisualStyleBackColor = true;
             this.btnSMS.Click += new System.EventHandler(this.btnSMS_Click);
+            // 
+            // progressBarCharge
+            // 
+            this.progressBarCharge.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.progressBarCharge.Location = new System.Drawing.Point(13, 3);
+            this.progressBarCharge.Name = "progressBarCharge";
+            this.progressBarCharge.Size = new System.Drawing.Size(100, 23);
+            this.progressBarCharge.TabIndex = 10;
             // 
             // MainForm
             // 
@@ -183,6 +192,7 @@
         private System.Windows.Forms.CheckBox applyAllFilters;
         private System.Windows.Forms.DataGridView messageView;
         private System.Windows.Forms.Button btnSMS;
+        private System.Windows.Forms.ProgressBar progressBarCharge;
     }
 }
 
