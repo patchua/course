@@ -72,6 +72,7 @@
             this.fromDatePicker.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.fromDatePicker.Location = new System.Drawing.Point(172, 57);
             this.fromDatePicker.Name = "fromDatePicker";
+            this.fromDatePicker.ShowCheckBox = true;
             this.fromDatePicker.Size = new System.Drawing.Size(200, 20);
             this.fromDatePicker.TabIndex = 2;
             this.fromDatePicker.ValueChanged += new System.EventHandler(this.fromDatePicker_ValueChanged);
@@ -81,6 +82,7 @@
             this.toDatePicker.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.toDatePicker.Location = new System.Drawing.Point(418, 57);
             this.toDatePicker.Name = "toDatePicker";
+            this.toDatePicker.ShowCheckBox = true;
             this.toDatePicker.Size = new System.Drawing.Size(200, 20);
             this.toDatePicker.TabIndex = 3;
             this.toDatePicker.ValueChanged += new System.EventHandler(this.toDatePicker_ValueChanged);

@@ -38,8 +38,7 @@ namespace SMSApp
             comboBoxFormating.DataSource = vFormatters.Keys.ToList();
             messageView.DataSource = new BindingSource(vShownMessageViewList, null);
             vPhone.SMSProvider.SMSReceived += SMSProvider_SMSReceived;
-
-            messageSender.DataSource = vMessageSenders;
+            messageSender.DataSource = vMessageSenders;            
         }
         
         private void SMSProvider_SMSReceived(MobilePhoneCommon.SMS.Message msg)
@@ -56,7 +55,7 @@ namespace SMSApp
                 vAllMsgList.Add(msg);
                 if (!vMessageSenders.Contains(msg.Name))
                     vMessageSenders.Add(msg.Name);
-                UpdateShownMessageView();
+                UpdateShownMessageList();
                               
             }
             
@@ -64,9 +63,9 @@ namespace SMSApp
 
        
 
-        private void UpdateShownMessageView()
+        private void UpdateShownMessageList()
         {
-       
+
             if (applyAllFilters.Checked)
                 vShownMessageList = vAllMsgList.Where(m => m.Name == messageSender.SelectedItem as string)
                     .Where(m => m.ReceivingTime > fromDatePicker.Value)
@@ -74,39 +73,31 @@ namespace SMSApp
                     .Where(m => m.Body.Contains(messageFilter.Text))
                     .ToList();
             else
-                vShownMessageList = vAllMsgList.Where(m => (m.Name == messageSender.SelectedItem as string) ||
-                     (m.ReceivingTime > fromDatePicker.Value) ||
-                     (m.ReceivingTime < toDatePicker.Value) ||
-                     (m.Body.Contains(messageFilter.Text)))
-                     .ToList();
-
-            var formatter = vFormatters.First(f => f.Key == comboBoxFormating.SelectedItem as string).Value;
-            vShownMessageViewList.Clear();
-            foreach (var msg in vShownMessageList)
             {
-                var fmsg = (formatter == null) ? msg : formatter(msg);
-                vShownMessageViewList.Add(new MessageView(fmsg));
+                vShownMessageList = vAllMsgList.Where(m => m.Name == messageSender.SelectedItem as string).ToList();
+                if (fromDatePicker.Checked)
+                    vShownMessageList = vShownMessageList.Where(m => m.ReceivingTime > fromDatePicker.Value).ToList();
+                if (toDatePicker.Checked)
+                    vShownMessageList = vShownMessageList.Where(m => m.ReceivingTime < toDatePicker.Value).ToList();
+                if (messageFilter.Text != null)
+                    vShownMessageList = vShownMessageList.Where(m => m.Body.Contains(messageFilter.Text)).ToList();
+            }
+            UpdateMessageView(vShownMessageList);
+        }
+
+        private void UpdateMessageView(List<MobilePhoneCommon.SMS.Message> messages)
+        {
+            vShownMessageViewList.Clear();
+            if (messages.Count != 0)
+            {
+                var formatter = vFormatters.First(f => f.Key == comboBoxFormating.SelectedItem as string).Value;                
+                foreach (var msg in messages)
+                {
+                    var fmsg = (formatter == null) ? msg : formatter(msg);
+                    vShownMessageViewList.Add(new MessageView(fmsg));
+                }
             }
         }
-
-        private bool EqualList<T>(List<T> listA, List<T> listB)
-        {
-            if (listA == null || listB == null)
-                return false;
-
-            if (listA.Count != listB.Count)
-                return false;
-
-            foreach (var elm in listA)
-                if (!listB.Contains(elm))
-                    return false;
-
-            foreach (var elm in listB)
-                if (!listA.Contains(elm))
-                    return false;
-            return true;
-        }
-
 
         private void SMSApp_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -117,6 +108,8 @@ namespace SMSApp
         {
             var width = CalcDropDownWidth(comboBoxFormating);          
             comboBoxFormating.Width = width;
+            fromDatePicker.Checked = false;
+            toDatePicker.Checked = false;
         }
 
         private int CalcDropDownWidth(ComboBox comboBox)
@@ -152,27 +145,30 @@ namespace SMSApp
 
         private void applyAllFilters_CheckedChanged(object sender, EventArgs e)
         {
-            UpdateShownMessageView();
+            //To bring some kind of structure to this GUI
+            toDatePicker.Checked = applyAllFilters.Checked;
+            fromDatePicker.Checked = applyAllFilters.Checked;
+            UpdateShownMessageList();
         }
 
         private void fromDatePicker_ValueChanged(object sender, EventArgs e)
         {
-            UpdateShownMessageView();
+            UpdateShownMessageList();
         }
 
         private void toDatePicker_ValueChanged(object sender, EventArgs e)
         {
-            UpdateShownMessageView();
+            UpdateShownMessageList();
         }
 
         private void messageSender_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdateShownMessageView();
+            UpdateShownMessageList();
         }
 
         private void messageFilter_TextChanged(object sender, EventArgs e)
         {
-            UpdateShownMessageView();
+            UpdateShownMessageList();
         }
     }
 }
